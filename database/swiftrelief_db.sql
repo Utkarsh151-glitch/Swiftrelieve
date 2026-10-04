@@ -37,7 +37,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'admin','admin123'),(2,'Utkarsh','utkarsh123');
+INSERT INTO `admins` VALUES (1,'admin','admin123');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ CREATE TABLE `volunteers` (
 
 LOCK TABLES `volunteers` WRITE;
 /*!40000 ALTER TABLE `volunteers` DISABLE KEYS */;
-INSERT INTO `volunteers` VALUES (3,'utkarsh vaibhav',20,'7970316509','chennao=i','money',1);
+INSERT INTO `volunteers` VALUES (3,'Demo Volunteer',25,'9000000000','chennao=i','money',1);
 /*!40000 ALTER TABLE `volunteers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
