@@ -1,126 +1,82 @@
-# Swiftrelief
+# SwiftRelief
 
-🌀 SwiftRelief — Disaster Resource Management System
+**A JavaFX desktop app for coordinating disaster relief: track disasters, volunteers, resources and aid requests in one MySQL-backed dashboard.**
 
-📖 Project Overview
+![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-17-007396)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-build-C71A36?logo=apachemaven&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-SwiftRelief is a JavaFX-based Disaster Resource Management System designed to coordinate volunteer efforts and resource distribution efficiently during emergencies. It provides a simple yet powerful interface for managing volunteers, storing their information in a MySQL database, and allowing real-time tracking and updates of available resources.
+> Desktop application: there is no live web demo.
 
+## Screenshots
 
+_To be added: run the app and save screenshots of the login screen and dashboard to `docs/screenshots/`._
 
+## Why
 
-⚙ Tech Stack
+During an emergency, relief teams juggle volunteers, supplies and incoming requests across spreadsheets and phone calls. SwiftRelief keeps them in one place so an admin can see what is needed, what is available and who can help.
 
-Frontend (GUI): JavaFX
+## Features
 
-Backend: Java (Maven project)
+- **Admin login** checked against the `admins` table
+- **Dashboard** that switches between the four management views
+- **Disasters:** add, list and delete disaster events
+- **Volunteers:** add, list and delete volunteers (name, age, contact, location, skill, availability)
+- **Resources:** add, list and delete relief resources
+- **Requests:** add, list and delete aid requests
+- MVC structure: FXML views, controllers, DAOs over JDBC
 
-Database: MySQL
+## Tech stack
 
-Build Tool: Apache Maven
+Java 17 · JavaFX 17 (FXML) · MySQL 8 (JDBC, `mysql-connector-j`) · Maven with `javafx-maven-plugin`
 
-Language: Java 17
+## Getting started
 
+**Prerequisites:** JDK 17+, Maven 3.9+, MySQL 8.
 
+1. Create the database and load the schema with demo data:
+   ```bash
+   mysql -u root -p -e "CREATE DATABASE swiftrelief_db"
+   mysql -u root -p swiftrelief_db < database/swiftrelief_db.sql
+   ```
+2. Set the connection settings (see `.env.example`):
+   ```bash
+   export SWIFTRELIEF_DB_USER=root
+   export SWIFTRELIEF_DB_PASSWORD=your_mysql_password
+   ```
+3. Run:
+   ```bash
+   mvn javafx:run
+   ```
+4. Log in with the demo admin account from the dump: `admin` / `admin123`.
 
+## Project structure
 
-
-🧩 Features
-
-✅ Register and manage volunteers
-✅ Store and fetch data from a MySQL database
-✅ Intuitive JavaFX user interface
-✅ MVC architecture (Model–View–Controller)
-✅ Fully modular and extendable for adding disaster resource data (e.g., food, shelter, medical aid)
-
-
-
-
-📁 Project Structure
-
+```text
 SwiftRelief/
-│
-├── pom.xml                             # Maven configuration
-├── src/
-│   ├── main/
-│   │   ├── java/com/swiftrelief/
-│   │   │   ├── App.java
-│   │   │   ├── DatabaseConnection.java
-│   │   │   ├── MainApp.java
-│   │   │   ├── Volunteer.java
-│   │   │   ├── VolunteerDAO.java
-│   │   │   ├── VolunteerController.java
-│   │   └── resources/com/swiftrelief/
-│   │       └── volunteer_view.fxml      # GUI layout file
-│   └── test/                            # Future test classes
-│
-└── README.md
+├── pom.xml
+├── database/
+│   └── swiftrelief_db.sql            # schema + demo data
+└── src/main/
+    ├── java/com/swiftrelief/
+    │   ├── MainApp.java              # JavaFX entry point
+    │   ├── DBUtil.java               # connection settings from environment variables
+    │   ├── *Controller.java          # login, dashboard, disaster, volunteer, resource, request, admin
+    │   ├── *DAO.java                 # JDBC data access
+    │   └── Admin, Disaster, Request, Resource, Volunteer (models)
+    └── resources/com/swiftrelief/
+        ├── *.fxml                    # views
+        └── style.css
+```
 
+## Known limitations
 
+- Admin passwords are stored and compared in plain text; hashing (e.g. BCrypt) is the next step.
+- Records can be added and deleted but not edited.
+- No automated tests yet.
 
-🧠 How It Works
+## Author
 
-1. The application connects to a MySQL database using DatabaseConnection.java.
-
-
-2. User inputs volunteer details via the JavaFX form (volunteer_view.fxml).
-
-
-3. VolunteerDAO handles all database interactions (Insert, Retrieve).
-
-
-4. Data is displayed or updated in real time on the GUI.
-
-
-
-
-🚀 How to Run
-
-Prerequisites:
-
-Java 17+
-
-Apache Maven 3.8+
-
-MySQL Server 8.0+
-
-
-Steps:
-
-1. Clone the repository:
-
-git clone https://github.com/Utkarsh-151-glitch/SwiftRelief.git
-cd SwiftRelief
-
-
-2. Configure your MySQL connection in DatabaseConnection.java.
-
-
-3. Create the database:
-
-CREATE DATABASE swiftrelief_db;
-USE swiftrelief_db;
-
-
-4. Build and run:
-
-mvn clean javafx:run
-
-
-
-
-🧩 Future Enhancements
-
-Add modules for resource requests and distribution tracking
-
-Implement user authentication (admin/volunteer roles)
-
-Add real-time disaster updates via APIs
-
-Integrate Google Maps API for location visualization
-
-
-
-👨‍💻 Contributors
-
-Utkarsh Vaibhav — Developer & Project Lead
+Utkarsh Vaibhav · [GitHub](https://github.com/Utkarsh151-glitch) · [LinkedIn](https://www.linkedin.com/in/utkarsh-vaibhav-76aa99300/)
